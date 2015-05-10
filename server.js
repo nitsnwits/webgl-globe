@@ -16,6 +16,11 @@ app.use(urlencoded({ extended: true }));
 
 // Create HTTP server and mount Express app
 var server = http.createServer(app);
-server.listen(3000, function() {
-    console.log('Express server listning on :' + 3000);
-});
+
+var port = process.env.OPENSHIFT_NODEJS_PORT || 8000
+    , ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+server.listen(port, ip);
+// sharedEnv.logger.log("Application Server listening on port " + port);
+// server.listen(3000, function() {
+//     console.log('Express server listning on :' + 3000);
+// });
